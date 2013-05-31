@@ -1,16 +1,16 @@
 
 
-module nailhole(pos) {
+module nailhole(pos, height=8) {
 	color("Blue", 0.5) 
 	translate(pos) {
-		translate ([0,0,-5]) cylinder(h=20, r=2, $fn=12);
-		translate ([0,0,9]) cylinder(h=3, r=4, $fn=20);
+		translate ([0, 0, -5]) cylinder(h=height+10, r=1.6/2, $fn=12);
+		translate ([0, 0, height-0.7]) cylinder(h=3, r=3.6/2, $fn=20);
 	}
 }
 
-module number(b) {
+module number(b, height=8) {
 	minkowski() {
-		linear_extrude(height = 8) import("20.dxf", center=true);
+		linear_extrude(height = height-b) import("20.dxf", center=true);
 		polyhedron(
 			points=[[b,b,0],[b,-b,0],[-b,-b,0],[-b,b,0],
            [0,0,b]],
