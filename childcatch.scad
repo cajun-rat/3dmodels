@@ -1,6 +1,7 @@
 
+// TODO: measure size of head
 module drillhole(hole=6.3, 
-		head=8, adjust=6) {
+		head=9, adjust=6) {
 
 	translate([-adjust/2,0,-10]) {
 		cylinder(h=20, r=hole/2);
@@ -54,7 +55,7 @@ module catch(width=50,
 
 // z0 is the top of the screwhead
 module countersink(clearance=3, 
-		head=5) {
+		head=6) {
 	translate([0,0,-10])
 	cylinder(r=clearance/2, h=20);
 	cylinder(r=head/2,h=10);
