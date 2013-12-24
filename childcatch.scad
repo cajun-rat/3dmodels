@@ -22,7 +22,7 @@ module drillhole(hole=6.3,
 module catch(width=50,
 	height=18,
 	prongw=8,
-	prongh=6,
+	prongh=4.16,
 	prongl=40) {
 	
 	difference() {
@@ -93,6 +93,6 @@ module hook(width=25,
 catch();
 //drillhole();
 
-translate([30,30,0])
-hook();
+//translate([30,30,0])
+//hook();
 //countersink();
