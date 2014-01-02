@@ -19,37 +19,40 @@ module drillhole(hole=6.3,
 }
 
 
-module catch(width=50,
+module catch(width=30,
 	height=18,
 	prongw=8,
-	prongh=6,
-	prongl=40) {
-	
+	prongh=3,
+	prongl=40, 
+	fillet=10) {
+
+
 	difference() {
+		translate([(16+prongl+6),-width/2,0])	
+		rotate([90,0,180]) 
+		linear_extrude(height=width) polygon([
+			[0,0],
+			[16,16],
+			[16,prongh],
+			[16+prongl-10,prongh],
+			[16+prongl,prongh+10],
+			[16+prongl,height],
+			[16+prongl+6, height],
+			[16+prongl+6,0],
+			[0,0]
+		]);
 	
-	translate([(16+prongl+6),-width/2,0])	
-	rotate([90,0,180]) 
-	linear_extrude(height=width) polygon([
-		[0,0],
-		[16,16],
-		[16,prongh],
-		[16+prongl-5,prongh],
-		[16+prongl,prongh+5],
-		[16+prongl,height],
-		[16+prongl+6, height],
-		[16+prongl+6,0],
-		[0,0]
-	]);
-	translate([6,-10-width/2, -5])
-	cube([prongl+15+10,(width-prongw)/2+10,height+10]);
-
-	translate([6,prongw/2, -5])
-	cube([prongl+15+10,(width-prongw)/2+10,height+10]);
+		// Centre gap
+		translate([6,-6, -5])
+		cube([prongl,12,height+10]);
 	
-		// Drill holes
+		// Drill hole
+		translate([2,0,height/2]) rotate([0,-90,0]) drillhole();
+	translate([fillet+6,width/2+1,fillet+prongh])	
+	rotate([90,0,0])
+	cylinder(r=10, h=width+2);
 
-		translate([2,width/2-10,height/2]) rotate([0,-90,0]) drillhole();
-		translate([2,-width/2+10,height/2]) rotate([0,-90,0]) drillhole();
+
 	}
 }
 
