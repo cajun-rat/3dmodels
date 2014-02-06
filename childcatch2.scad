@@ -1,7 +1,7 @@
 
 // TODO: measure size of head
-module drillhole(hole=6.3, 
-		head=9, adjust=6) {
+module drillhole(hole=7.3, 
+		head=11, adjust=6) {
 
 	translate([-adjust/2,0,-20]) {
 		cylinder(h=30, r=hole/2);
@@ -21,7 +21,7 @@ module drillhole(hole=6.3,
 
 module catch(
 	width=30,
- 	length=60,
+ 	length=65,
 	springh=2,
 	fillet=10,
 	slotw=20) {
@@ -41,10 +41,9 @@ module catch(
 		cylinder(r=10, h=width+2);
 
 		// Drill hole
-		translate([1.50, width/2,10])
+		translate([1.50, 4/8*width,10])
 		rotate([0,-90, 0])
 		drillhole(adjust=5);
-		
 
 		// slot
 		translate([15+slotw/2, (width-slotw)/2, -1])
@@ -67,8 +66,8 @@ module catch(
 }
 
 // z0 is the top of the screwhead
-module countersink(clearance=3, 
-		head=6) {
+module countersink(clearance=4, 
+		head=7) {
 	translate([0,0,-10])
 	cylinder(r=clearance/2, h=20);
 	cylinder(r=head/2,h=10);
@@ -78,7 +77,7 @@ module countersink(clearance=3,
 }
 
 module hook(width=15, 
-		height=5, 
+		height=10, 
 		length=15) {
 
 	difference() {
@@ -87,6 +86,7 @@ module hook(width=15,
 			translate([0, -3.5,0])
 			cube([30,7,height]);
 		}
+		translate([0,0,height-2])
 		countersink();
 
 		// chamfer on ramp
@@ -97,5 +97,4 @@ module hook(width=15,
 }
 
 catch();
-translate([30,30,0])
-hook();
+//hook();
